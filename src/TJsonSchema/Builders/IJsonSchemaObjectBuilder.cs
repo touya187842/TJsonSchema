@@ -11,7 +11,7 @@ public interface IJsonSchemaObjectBuilder : IJsonSchemaRootBuilder
     /// <summary>
     /// 這個 Object 定義的 Properties
     /// </summary>
-    internal ICollection<IJsonSchemaPropertyBuilder>? Properties { get; set; }
+    internal IDictionary<string, IJsonSchemaPropertyBuilder>? Properties { get; set; }
 
     /// <summary>
     /// 這個 Object 至少需要含有多少 Properties

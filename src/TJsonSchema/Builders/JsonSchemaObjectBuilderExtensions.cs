@@ -25,6 +25,29 @@ public static class JsonSchemaObjectBuilderExtensions
         return obj;
     }
 
+    public static IJsonSchemaPropertyBuilder AddProperty<T>(
+        this T obj,
+        string propertyName,
+        Action<IJsonSchemaRootBuilder> propertyValue)
+        where T : IJsonSchemaObjectBuilder
+    {
+        if (obj.Properties is null)
+        {
+            obj.Properties  = new Dictionary<string, IJsonSchemaPropertyBuilder>();
+        }
+        else
+        {
+            if (obj.Properties.ContainsKey(propertyName))
+            {
+                throw new ArgumentException($"Property {propertyName} is already added.");
+            }
+        }
+        var template = new DefaultJsonSchemaRootBuilder();
+        propertyValue.Invoke(template);
+        var property = new JsonSchemaPropertyBuilder { Name = propertyName, Property = template };
+        return property;
+    }
+
     public static T AdditionalProperties<T>(this T obj, Action<IJsonSchemaRootBuilder> schemaConfig)
         where T : IJsonSchemaObjectBuilder
     {
