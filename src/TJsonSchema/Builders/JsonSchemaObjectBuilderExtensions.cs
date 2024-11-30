@@ -42,7 +42,7 @@ public static class JsonSchemaObjectBuilderExtensions
                 throw new ArgumentException($"Property {propertyName} is already added.");
             }
         }
-        var template = new DefaultJsonSchemaRootBuilder();
+        var template = new DefaultJsonSchemaBuilder();
         propertyValue.Invoke(template);
         var property = new JsonSchemaPropertyBuilder { Name = propertyName, Property = template };
         return property;
@@ -51,7 +51,7 @@ public static class JsonSchemaObjectBuilderExtensions
     public static T AdditionalProperties<T>(this T obj, Action<IJsonSchemaRootBuilder> schemaConfig)
         where T : IJsonSchemaObjectBuilder
     {
-        var additional = new DefaultJsonSchemaRootBuilder();
+        var additional = new DefaultJsonSchemaBuilder();
         schemaConfig.Invoke(additional);
         obj.AllowAdditionalPropertySchema = additional;
         return obj;
@@ -64,7 +64,7 @@ public static class JsonSchemaObjectBuilderExtensions
         Action<IJsonSchemaRootBuilder> schemaConfig)
         where T : IJsonSchemaObjectBuilder
     {
-        var additional = new DefaultJsonSchemaRootBuilder();
+        var additional = new DefaultJsonSchemaBuilder();
         schemaConfig.Invoke(additional);
         obj.PatternProperties ??= new List<KeyValuePair<Regex, IJsonSchemaRootBuilder>>();
         obj.PatternProperties.Add(new KeyValuePair<Regex, IJsonSchemaRootBuilder>(new Regex(regex), additional));

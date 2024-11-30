@@ -7,11 +7,11 @@ public static class JsonSchemaLogicalBuilderExtensions
     public static T Not<T>(this T schema, Action<IJsonSchemaRootBuilder> subSchema)
         where T : IJsonSchemaRootBuilder
     {
-        if (schema is DefaultJsonSchemaRootBuilder { Child: null } @default)
+        if (schema is IJsonSchemaUnkindBuilder { Kind: null } @default)
         {
-            var template = new DefaultJsonSchemaRootBuilder();
+            var template = new DefaultJsonSchemaBuilder();
             subSchema.Invoke(template);
-            @default.Child = new NotJsonSchema { Schema = template };
+            @default.Kind = new NotJsonSchema { Schema = template };
             return schema;
         }
         throw new InvalidOperationException();
@@ -22,12 +22,12 @@ public static class JsonSchemaLogicalBuilderExtensions
     {
         switch (schema)
         {
-            case DefaultJsonSchemaRootBuilder { Child: null } @default:
+            case IJsonSchemaUnkindBuilder { Kind: null } @default:
             {
-                @default.Child = new AnyOfJsonSchema().AddSubSchemas(subSchemas);
+                @default.Kind = new AnyOfJsonSchema().AddSubSchemas(subSchemas);
                 return schema;
             }
-            case DefaultJsonSchemaRootBuilder { Child: AnyOfJsonSchema anyOf } @default:
+            case IJsonSchemaUnkindBuilder { Kind: AnyOfJsonSchema anyOf } @default:
             {
                 anyOf.AddSubSchemas(subSchemas);
                 return schema;
@@ -47,12 +47,12 @@ public static class JsonSchemaLogicalBuilderExtensions
     {
         switch (schema)
         {
-            case DefaultJsonSchemaRootBuilder { Child: null } @default:
+            case IJsonSchemaUnkindBuilder { Kind: null } @default:
             {
-                @default.Child = new AllOfJsonSchema().AddSubSchemas(subSchemas);
+                @default.Kind = new AllOfJsonSchema().AddSubSchemas(subSchemas);
                 return schema;
             }
-            case DefaultJsonSchemaRootBuilder { Child: AllOfJsonSchema allOf } @default:
+            case IJsonSchemaUnkindBuilder { Kind: AllOfJsonSchema allOf } @default:
             {
                 allOf.AddSubSchemas(subSchemas);
                 return schema;
@@ -72,12 +72,12 @@ public static class JsonSchemaLogicalBuilderExtensions
     {
         switch (schema)
         {
-            case DefaultJsonSchemaRootBuilder { Child: null } @default:
+            case IJsonSchemaUnkindBuilder { Kind: null } @default:
             {
-                @default.Child = new OneOfJsonSchema().AddSubSchemas(subSchemas);
+                @default.Kind = new OneOfJsonSchema().AddSubSchemas(subSchemas);
                 return schema;
             }
-            case DefaultJsonSchemaRootBuilder { Child: AnyOfJsonSchema oneOf } @default:
+            case IJsonSchemaUnkindBuilder { Kind: AnyOfJsonSchema oneOf } @default:
             {
                 oneOf.AddSubSchemas(subSchemas);
                 return schema;
@@ -97,7 +97,7 @@ public static class JsonSchemaLogicalBuilderExtensions
     {
         foreach (var schema in subSchemas)
         {
-            var subSchema = new DefaultJsonSchemaRootBuilder();
+            var subSchema = new DefaultJsonSchemaBuilder();
             schema.Invoke(subSchema);
             collections.Items.Add(subSchema);
         }
