@@ -3,7 +3,7 @@ namespace TJsonSchema.Builders;
 /// <summary>
 /// 表示一個關於 數值 的 JsonSchema 建造者
 /// </summary>
-public interface IJsonSchemaNumberBuilder : IJsonSchemaRootBuilder
+public interface IJsonSchemaNumberBuildContext : IJsonSchemaRootBuildContext
 {
     /// <summary>
     /// 設定數值必須是設定值的整數倍

@@ -5,7 +5,7 @@ namespace TJsonSchema.Builders;
 /// <summary>
 /// 表示一個關於 字串 的 JsonSchema 建造者
 /// </summary>
-public interface IJsonSchemaStringBuilder : IJsonSchemaRootBuilder
+public interface IJsonSchemaStringBuildContext : IJsonSchemaRootBuildContext
 {
     /// <summary>
     /// 設定字串須符合已知的 format

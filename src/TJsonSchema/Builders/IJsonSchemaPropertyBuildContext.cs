@@ -5,7 +5,7 @@ namespace TJsonSchema.Builders;
 /// <summary>
 /// 表示一個關於 Property 的 JsonSchema 建造者, 包含 Property 名稱跟對應的 JsonSchema Property 值
 /// </summary>
-public interface IJsonSchemaPropertyBuilder
+public interface IJsonSchemaPropertyBuildContext
 {
     /// <summary>
     /// Property 名稱
@@ -15,7 +15,7 @@ public interface IJsonSchemaPropertyBuilder
     /// <summary>
     /// Property 值, 代表一個 JsonSchema
     /// </summary>
-    public IJsonSchemaRootBuilder Property { get; set; }
+    public IJsonSchemaRootBuildContext Property { get; set; }
     
     /// <summary>
     /// 這個 Property 存在前提所需的其他 Property

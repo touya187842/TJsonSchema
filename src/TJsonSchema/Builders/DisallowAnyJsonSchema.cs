@@ -3,7 +3,7 @@ namespace TJsonSchema.Builders;
 /// <summary>
 /// 表示任何 Json 物件皆不合格的 JsonSchema
 /// </summary>
-internal class DisallowAnyJsonSchema : IJsonSchemaRootBuilder
+internal class DisallowAnyJsonSchema : IJsonSchemaRootBuildContext
 {
     internal static DisallowAnyJsonSchema Instance { get; } = new DisallowAnyJsonSchema();
 

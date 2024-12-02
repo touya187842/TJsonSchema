@@ -2,14 +2,14 @@ using System;
 
 namespace TJsonSchema.Builders;
 
-public static class JsonSchemaLogicalBuilderExtensions
+public static class JsonSchemaLogicalBuildContextExtensions
 {
-    public static T Not<T>(this T schema, Action<IJsonSchemaRootBuilder> subSchema)
-        where T : IJsonSchemaRootBuilder
+    public static T Not<T>(this T schema, Action<IJsonSchemaRootBuildContext> subSchema)
+        where T : IJsonSchemaRootBuildContext
     {
-        if (schema is IJsonSchemaUnkindBuilder { Kind: null } @default)
+        if (schema is IJsonSchemaUnkindBuildContext { Kind: null } @default)
         {
-            var template = new DefaultJsonSchemaBuilder();
+            var template = new DefaultJsonSchemaBuildContext();
             subSchema.Invoke(template);
             @default.Kind = new NotJsonSchema { Schema = template };
             return schema;
@@ -17,17 +17,17 @@ public static class JsonSchemaLogicalBuilderExtensions
         throw new InvalidOperationException();
     }
 
-    public static T AnyOf<T>(this T schema, params Action<IJsonSchemaRootBuilder>[] subSchemas)
-        where T : IJsonSchemaRootBuilder
+    public static T AnyOf<T>(this T schema, params Action<IJsonSchemaRootBuildContext>[] subSchemas)
+        where T : IJsonSchemaRootBuildContext
     {
         switch (schema)
         {
-            case IJsonSchemaUnkindBuilder { Kind: null } @default:
+            case IJsonSchemaUnkindBuildContext { Kind: null } @default:
             {
                 @default.Kind = new AnyOfJsonSchema().AddSubSchemas(subSchemas);
                 return schema;
             }
-            case IJsonSchemaUnkindBuilder { Kind: AnyOfJsonSchema anyOf } @default:
+            case IJsonSchemaUnkindBuildContext { Kind: AnyOfJsonSchema anyOf } @default:
             {
                 anyOf.AddSubSchemas(subSchemas);
                 return schema;
@@ -42,17 +42,17 @@ public static class JsonSchemaLogicalBuilderExtensions
         }
     }
 
-    public static T AllOf<T>(this T schema, params Action<IJsonSchemaRootBuilder>[] subSchemas)
-        where T : IJsonSchemaRootBuilder
+    public static T AllOf<T>(this T schema, params Action<IJsonSchemaRootBuildContext>[] subSchemas)
+        where T : IJsonSchemaRootBuildContext
     {
         switch (schema)
         {
-            case IJsonSchemaUnkindBuilder { Kind: null } @default:
+            case IJsonSchemaUnkindBuildContext { Kind: null } @default:
             {
                 @default.Kind = new AllOfJsonSchema().AddSubSchemas(subSchemas);
                 return schema;
             }
-            case IJsonSchemaUnkindBuilder { Kind: AllOfJsonSchema allOf } @default:
+            case IJsonSchemaUnkindBuildContext { Kind: AllOfJsonSchema allOf } @default:
             {
                 allOf.AddSubSchemas(subSchemas);
                 return schema;
@@ -67,17 +67,17 @@ public static class JsonSchemaLogicalBuilderExtensions
         }
     }
 
-    public static T OneOf<T>(this T schema, params Action<IJsonSchemaRootBuilder>[] subSchemas)
-        where T : IJsonSchemaRootBuilder
+    public static T OneOf<T>(this T schema, params Action<IJsonSchemaRootBuildContext>[] subSchemas)
+        where T : IJsonSchemaRootBuildContext
     {
         switch (schema)
         {
-            case IJsonSchemaUnkindBuilder { Kind: null } @default:
+            case IJsonSchemaUnkindBuildContext { Kind: null } @default:
             {
                 @default.Kind = new OneOfJsonSchema().AddSubSchemas(subSchemas);
                 return schema;
             }
-            case IJsonSchemaUnkindBuilder { Kind: AnyOfJsonSchema oneOf } @default:
+            case IJsonSchemaUnkindBuildContext { Kind: AnyOfJsonSchema oneOf } @default:
             {
                 oneOf.AddSubSchemas(subSchemas);
                 return schema;
@@ -92,12 +92,12 @@ public static class JsonSchemaLogicalBuilderExtensions
         }
     }
 
-    private static T AddSubSchemas<T>(this T collections, Action<IJsonSchemaRootBuilder>[] subSchemas)
+    private static T AddSubSchemas<T>(this T collections, Action<IJsonSchemaRootBuildContext>[] subSchemas)
         where T : CollectionLogicJsonSchema
     {
         foreach (var schema in subSchemas)
         {
-            var subSchema = new DefaultJsonSchemaBuilder();
+            var subSchema = new DefaultJsonSchemaBuildContext();
             schema.Invoke(subSchema);
             collections.Items.Add(subSchema);
         }

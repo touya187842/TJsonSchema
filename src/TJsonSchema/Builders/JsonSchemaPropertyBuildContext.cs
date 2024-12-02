@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace TJsonSchema.Builders;
 
-internal class JsonSchemaPropertyBuilder : IJsonSchemaPropertyBuilder
+internal class JsonSchemaPropertyBuildContext : IJsonSchemaPropertyBuildContext
 {
     public required string Name { get; set; }
     
-    public required IJsonSchemaRootBuilder Property { get; set; }
+    public required IJsonSchemaRootBuildContext Property { get; set; }
     
     public ICollection<object>? Dependencies { get; set; }
     
