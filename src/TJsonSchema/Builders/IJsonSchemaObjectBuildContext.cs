@@ -6,7 +6,7 @@ namespace TJsonSchema.Builders;
 /// <summary>
 /// 表示一個關於 Object 的 JsonSchema 建造者
 /// </summary>
-public interface IJsonSchemaObjectBuildContext : IJsonSchemaRootBuildContext
+public interface IJsonSchemaObjectBuildContext : IJsonSchemaBuildContext
 {
     /// <summary>
     /// 這個 Object 定義的 Properties
@@ -26,10 +26,10 @@ public interface IJsonSchemaObjectBuildContext : IJsonSchemaRootBuildContext
     /// <summary>
     /// 設定這個 Objects 能否在定義之外增加其他的 Properties
     /// </summary>
-    internal IJsonSchemaRootBuildContext? AllowAdditionalPropertySchema { get; set; }
+    internal IJsonSchemaBuildContext? AllowAdditionalPropertySchema { get; set; }
 
     /// <summary>
     /// 設定這個 Objects 檢查符合 Regex 定義的 Property 名稱, 對應的 Property 值需要符合的 JsonSchema 
     /// </summary>
-    internal ICollection<KeyValuePair<Regex, IJsonSchemaRootBuildContext>>? PatternProperties { get; set; }
+    internal ICollection<KeyValuePair<Regex, IJsonSchemaBuildContext>>? PatternProperties { get; set; }
 }

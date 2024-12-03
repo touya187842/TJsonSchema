@@ -28,7 +28,7 @@ public static class JsonSchemaObjectBuildContextExtensions
     public static IJsonSchemaPropertyBuildContext AddProperty<T>(
         this T obj,
         string propertyName,
-        Action<IJsonSchemaRootBuildContext> propertyValue)
+        Action<IJsonSchemaBuildContext> propertyValue)
         where T : IJsonSchemaObjectBuildContext
     {
         if (obj.Properties is null)
@@ -48,7 +48,7 @@ public static class JsonSchemaObjectBuildContextExtensions
         return property;
     }
 
-    public static T AdditionalProperties<T>(this T obj, Action<IJsonSchemaRootBuildContext> schemaConfig)
+    public static T AdditionalProperties<T>(this T obj, Action<IJsonSchemaBuildContext> schemaConfig)
         where T : IJsonSchemaObjectBuildContext
     {
         var additional = new DefaultJsonSchemaBuildContext();
@@ -61,13 +61,13 @@ public static class JsonSchemaObjectBuildContextExtensions
         this T obj,
         [StringSyntax(StringSyntaxAttribute.Regex)]
         string regex,
-        Action<IJsonSchemaRootBuildContext> schemaConfig)
+        Action<IJsonSchemaBuildContext> schemaConfig)
         where T : IJsonSchemaObjectBuildContext
     {
         var additional = new DefaultJsonSchemaBuildContext();
         schemaConfig.Invoke(additional);
-        obj.PatternProperties ??= new List<KeyValuePair<Regex, IJsonSchemaRootBuildContext>>();
-        obj.PatternProperties.Add(new KeyValuePair<Regex, IJsonSchemaRootBuildContext>(new Regex(regex), additional));
+        obj.PatternProperties ??= new List<KeyValuePair<Regex, IJsonSchemaBuildContext>>();
+        obj.PatternProperties.Add(new KeyValuePair<Regex, IJsonSchemaBuildContext>(new Regex(regex), additional));
         return obj;
     }
 }

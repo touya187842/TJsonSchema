@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace TJsonSchema.Builders;
 
-internal abstract class CollectionLogicJsonSchema : IJsonSchemaRootBuildContext
+internal abstract class CollectionLogicJsonSchema : IJsonSchemaBuildContext
 {
     public string? Description { get; set; }
 
-    public ICollection<IJsonSchemaRootBuildContext> Items { get; set; } = new List<IJsonSchemaRootBuildContext>();
+    public ICollection<IJsonSchemaBuildContext> Items { get; set; } = new List<IJsonSchemaBuildContext>();
 }
 
 internal class AnyOfJsonSchema : CollectionLogicJsonSchema

@@ -6,7 +6,7 @@ internal class JsonSchemaPropertyBuildContext : IJsonSchemaPropertyBuildContext
 {
     public required string Name { get; set; }
     
-    public required IJsonSchemaRootBuildContext Property { get; set; }
+    public required IJsonSchemaBuildContext Property { get; set; }
     
     public ICollection<object>? Dependencies { get; set; }
     

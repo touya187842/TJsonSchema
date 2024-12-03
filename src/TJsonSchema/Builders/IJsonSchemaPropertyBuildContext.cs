@@ -15,7 +15,7 @@ public interface IJsonSchemaPropertyBuildContext
     /// <summary>
     /// Property 值, 代表一個 JsonSchema
     /// </summary>
-    public IJsonSchemaRootBuildContext Property { get; set; }
+    public IJsonSchemaBuildContext Property { get; set; }
     
     /// <summary>
     /// 這個 Property 存在前提所需的其他 Property

@@ -1,8 +1,8 @@
 namespace TJsonSchema.Builders;
 
-internal class DefaultJsonSchemaBuildContext : IJsonSchemaUnkindBuildContext
+internal class DefaultJsonSchemaBuildContext : IJsonSchemaRootBuildContext
 {
     public string? Description { get; set; }
     
-    public IJsonSchemaRootBuildContext? Kind { get; set; }
+    public IJsonSchemaBuildContext? Kind { get; set; }
 }
