@@ -78,6 +78,7 @@ public static class JsonSchemaObjectBuildContextExtensions
         var template = TFactory.CreateRootBuildContext();
         propertyValue.Invoke(template);
         var property = new JsonSchemaPropertyBuildContext<TFactory> { Name = propertyName, Property = template };
+        obj.Properties.Add(propertyName, property);
         return property;
     }
 

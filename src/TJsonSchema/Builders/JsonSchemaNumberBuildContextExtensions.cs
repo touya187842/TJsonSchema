@@ -4,7 +4,7 @@ namespace TJsonSchema.Builders;
 
 public static class JsonSchemaNumberBuildContextExtensions
 {
-    public static IJsonSchemaNumberBuildContext AsString<TFactory>(this IJsonSchemaRootBuildContext<TFactory> context)
+    public static IJsonSchemaNumberBuildContext AsNumber<TFactory>(this IJsonSchemaRootBuildContext<TFactory> context)
         where TFactory : IBuildContextFactory<TFactory>
     {
         switch (context)
