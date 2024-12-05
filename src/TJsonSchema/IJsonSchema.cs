@@ -12,3 +12,8 @@ public interface IJsonSchema
     /// <returns><see langword="true"/> 表示符合; <see langword="false"/> 表示不符合</returns>
     public bool Validate(IJsonNode node);
 }
+
+public interface IJsonSchema<in T> : IJsonSchema where T : IJsonNode
+{
+    public bool Validate(T value);
+}

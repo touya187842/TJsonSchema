@@ -1,6 +1,7 @@
+using TJsonSchema.Json;
+
 namespace TJsonSchema.Schema;
 
-internal interface IJsonSchemaNumber : IJsonSchema
+internal interface IJsonSchemaNumber : IJsonSchema<IJsonNumber>
 {
-    public bool Validate(double number);
 }

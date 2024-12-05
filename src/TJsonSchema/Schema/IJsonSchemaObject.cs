@@ -1,8 +1,7 @@
-using System.Collections.Generic;
+using TJsonSchema.Json;
 
 namespace TJsonSchema.Schema;
 
-public interface IJsonSchemaObject : IJsonSchema
+public interface IJsonSchemaObject : IJsonSchema<IJsonObject>
 {
-    public bool Validate(KeyValuePair<string, IJsonNode> property);
 }

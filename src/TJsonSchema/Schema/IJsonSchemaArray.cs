@@ -1,8 +1,7 @@
-using System.Collections.Generic;
+using TJsonSchema.Json;
 
 namespace TJsonSchema.Schema;
 
-internal interface IJsonSchemaArray : IJsonSchema
+internal interface IJsonSchemaArray : IJsonSchema<IJsonArray>
 {
-    public bool Validate(IReadOnlyList<IJsonNode> array);
 }

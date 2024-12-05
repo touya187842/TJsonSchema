@@ -1,6 +1,7 @@
+using TJsonSchema.Json;
+
 namespace TJsonSchema.Schema;
 
-public interface IJsonSchemaString : IJsonSchema
+public interface IJsonSchemaString : IJsonSchema<IJsonString>
 {
-    public bool Validate(string text);
 }
