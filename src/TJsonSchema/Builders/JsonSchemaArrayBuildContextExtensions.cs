@@ -2,27 +2,37 @@ namespace TJsonSchema.Builders;
 
 public static class JsonSchemaArrayBuildContextExtensions
 {
-    public static T MinItems<T>(this T array, int minItems) where T : IJsonSchemaArrayBuildContext
+    public static TContext MinItems<TContext, TFactory>(this TContext array, int minItems)
+        where TContext : IJsonSchemaArrayBuildContext<TFactory>
+        where TFactory : IBuildContextFactory<TFactory>
     {
         array.MinItems = minItems;
         return array;
     }
 
-    public static T MaxItems<T>(this T array, int maxItems) where T : IJsonSchemaArrayBuildContext
+    public static TContext MaxItems<TContext, TFactory>(this TContext array, int maxItems)
+        where TContext : IJsonSchemaArrayBuildContext<TFactory>
+        where TFactory : IBuildContextFactory<TFactory>
     {
         array.MaxItems = maxItems;
         return array;
     }
 
-    public static T UniqueItems<T>(this T array, bool mustUnique = true) where T : IJsonSchemaArrayBuildContext
+    public static TContext UniqueItems<TContext, TFactory>(this TContext array, bool mustUnique = true)
+        where TContext : IJsonSchemaArrayBuildContext<TFactory>
+        where TFactory : IBuildContextFactory<TFactory>
     {
         array.MustUniqueItems = mustUnique;
         return array;
     }
 
-    public static T AdditionalItems<T>(this T array, bool allowAny) where T : IJsonSchemaArrayBuildContext
+    public static TContext AdditionalItems<TContext, TFactory>(this TContext array, bool allowAny)
+        where TContext : IJsonSchemaArrayBuildContext<TFactory>
+        where TFactory : IBuildContextFactory<TFactory>
     {
-        array.AllowAdditionalItemSchema = allowAny ? AllowAnyJsonSchema.Instance : DisallowAnyJsonSchema.Instance;
+        var root = TFactory.CreateRootBuildContext();
+        root.Kind = allowAny ? AllowAnyJsonSchema.Instance : DisallowAnyJsonSchema.Instance;
+        array.AllowAdditionalItemSchema = root;
         return array;
     }
 }

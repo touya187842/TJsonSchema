@@ -1,6 +1,8 @@
 namespace TJsonSchema.Builders;
 
-internal interface IJsonSchemaRootBuildContext : IJsonSchemaBuildContext
+public interface IJsonSchemaRootBuildContext<in T> where T : IBuildContextFactory<T>
 {
     internal IJsonSchemaBuildContext? Kind { get; set; }
+
+    public IJsonSchema Build();
 }

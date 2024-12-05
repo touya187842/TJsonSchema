@@ -2,21 +2,26 @@ using System.Collections.Generic;
 
 namespace TJsonSchema.Builders;
 
-internal abstract class CollectionLogicJsonSchema : IJsonSchemaBuildContext
+internal abstract class CollectionLogicJsonSchema<TFactory> : IJsonSchemaBuildContext
+    where TFactory : IBuildContextFactory<TFactory>
 {
     public string? Description { get; set; }
 
-    public ICollection<IJsonSchemaBuildContext> Items { get; set; } = new List<IJsonSchemaBuildContext>();
+    public ICollection<IJsonSchemaRootBuildContext<TFactory>> Items { get; set; } =
+        new List<IJsonSchemaRootBuildContext<TFactory>>();
 }
 
-internal class AnyOfJsonSchema : CollectionLogicJsonSchema
+internal class AnyOfJsonSchema<TFactory> : CollectionLogicJsonSchema<TFactory>
+    where TFactory : IBuildContextFactory<TFactory>
 {
 }
 
-internal class AllOfJsonSchema : CollectionLogicJsonSchema
+internal class AllOfJsonSchema<TFactory> : CollectionLogicJsonSchema<TFactory>
+    where TFactory : IBuildContextFactory<TFactory>
 {
 }
 
-internal class OneOfJsonSchema : CollectionLogicJsonSchema
+internal class OneOfJsonSchema<TFactory> : CollectionLogicJsonSchema<TFactory>
+    where TFactory : IBuildContextFactory<TFactory>
 {
 }

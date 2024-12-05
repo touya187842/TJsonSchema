@@ -5,7 +5,8 @@ namespace TJsonSchema.Builders;
 /// <summary>
 /// 表示一個關於 陣列/集合 的 JsonSchema 建造者
 /// </summary>
-public interface IJsonSchemaArrayBuildContext : IJsonSchemaBuildContext
+public interface IJsonSchemaArrayBuildContext<TFactory> : IJsonSchemaBuildContext
+    where TFactory : IBuildContextFactory<TFactory>
 {
     /// <summary>
     /// 設定集合中最多可以允許的項目數
@@ -25,10 +26,10 @@ public interface IJsonSchemaArrayBuildContext : IJsonSchemaBuildContext
     /// <summary>
     /// 設定集合中的項目依照位置, 必須滿足的 JsonSchema
     /// </summary>
-    internal ICollection<IJsonSchemaBuildContext>? Items { get; set; }
+    internal ICollection<IJsonSchemaRootBuildContext<TFactory>>? Items { get; set; }
 
     /// <summary>
     /// 設定集合中是否可以存在依位置定義之外的 JsonSchema
     /// </summary>
-    internal IJsonSchemaBuildContext? AllowAdditionalItemSchema { get; set; }
+    internal IJsonSchemaRootBuildContext<TFactory>? AllowAdditionalItemSchema { get; set; }
 }

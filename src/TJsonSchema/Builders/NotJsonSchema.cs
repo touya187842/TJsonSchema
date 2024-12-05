@@ -1,8 +1,9 @@
 namespace TJsonSchema.Builders;
 
-internal class NotJsonSchema : IJsonSchemaBuildContext
+internal class NotJsonSchema<TFactory> : IJsonSchemaBuildContext
+    where TFactory : IBuildContextFactory<TFactory>
 {
     public string? Description { get; set; }
-    
-    public required IJsonSchemaBuildContext Schema { get; set; }
+
+    public required IJsonSchemaRootBuildContext<TFactory> Schema { get; set; }
 }
