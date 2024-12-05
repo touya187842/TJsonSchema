@@ -1,7 +1,30 @@
+using System;
+
 namespace TJsonSchema.Builders;
 
 public static class JsonSchemaArrayBuildContextExtensions
 {
+    public static IJsonSchemaArrayBuildContext<TFactory> AsArray<TContext, TFactory>(this TContext context)
+        where TContext : IJsonSchemaRootBuildContext<TFactory>
+        where TFactory : IBuildContextFactory<TFactory>
+    {
+        switch (context)
+        {
+            case { Kind: null }:
+            {
+                var array = TFactory.CreateArrayBuildContext();
+                context.Kind = array;
+                return array;
+            }
+            case { Kind: IJsonSchemaArrayBuildContext<TFactory> array }:
+            {
+                return array;
+            }
+            default:
+                throw new InvalidOperationException();
+        }
+    }
+
     public static TContext MinItems<TContext, TFactory>(this TContext array, int minItems)
         where TContext : IJsonSchemaArrayBuildContext<TFactory>
         where TFactory : IBuildContextFactory<TFactory>

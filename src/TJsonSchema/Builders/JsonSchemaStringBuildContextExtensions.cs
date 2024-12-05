@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -5,6 +6,27 @@ namespace TJsonSchema.Builders;
 
 public static class JsonSchemaStringBuildContextExtensions
 {
+    public static IJsonSchemaStringBuildContext AsString<TContext, TFactory>(this TContext context)
+        where TContext : IJsonSchemaRootBuildContext<TFactory>
+        where TFactory : IBuildContextFactory<TFactory>
+    {
+        switch (context)
+        {
+            case { Kind: null }:
+            {
+                var @string = TFactory.CreateStringBuildContext();
+                context.Kind = @string;
+                return @string;
+            }
+            case { Kind: IJsonSchemaStringBuildContext @string }:
+            {
+                return @string;
+            }
+            default:
+                throw new InvalidOperationException();
+        }
+    }
+    
     public static T MaxLength<T>(this T @string, int maxLength) where T : IJsonSchemaStringBuildContext
     {
         @string.MaxLength = maxLength;

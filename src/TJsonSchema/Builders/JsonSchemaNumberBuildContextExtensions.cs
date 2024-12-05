@@ -1,7 +1,30 @@
+using System;
+
 namespace TJsonSchema.Builders;
 
 public static class JsonSchemaNumberBuildContextExtensions
 {
+    public static IJsonSchemaNumberBuildContext AsString<TContext, TFactory>(this TContext context)
+        where TContext : IJsonSchemaRootBuildContext<TFactory>
+        where TFactory : IBuildContextFactory<TFactory>
+    {
+        switch (context)
+        {
+            case { Kind: null }:
+            {
+                var number = TFactory.CreateNumberBuildContext();
+                context.Kind = number;
+                return number;
+            }
+            case { Kind: IJsonSchemaNumberBuildContext number }:
+            {
+                return number;
+            }
+            default:
+                throw new InvalidOperationException();
+        }
+    }
+    
     public static T MustBeMultipleOf<T>(this T number, int multipleOf) where T : IJsonSchemaNumberBuildContext
     {
         number.MultipleOf = multipleOf;

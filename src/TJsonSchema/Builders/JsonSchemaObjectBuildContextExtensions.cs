@@ -7,6 +7,27 @@ namespace TJsonSchema.Builders;
 
 public static class JsonSchemaObjectBuildContextExtensions
 {
+    public static IJsonSchemaObjectBuildContext<TFactory> AsObject<TContext, TFactory>(this TContext context)
+        where TContext : IJsonSchemaRootBuildContext<TFactory>
+        where TFactory : IBuildContextFactory<TFactory>
+    {
+        switch (context)
+        {
+            case { Kind: null }:
+            {
+                var obj = TFactory.CreateObjectBuildContext();
+                context.Kind = obj;
+                return obj;
+            }
+            case { Kind: IJsonSchemaObjectBuildContext<TFactory> obj }:
+            {
+                return obj;
+            }
+            default:
+                throw new InvalidOperationException();
+        }
+    }
+    
     public static TContext MinProperties<TContext, TFactory>(this TContext obj, int minProperties)
         where TContext : IJsonSchemaObjectBuildContext<TFactory>
         where TFactory : IBuildContextFactory<TFactory>
