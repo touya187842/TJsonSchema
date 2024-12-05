@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playground", "src\Playgroun
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TJsonSchema", "src\TJsonSchema\TJsonSchema.csproj", "{2BD6DD96-B68F-4512-BDC6-EAB59B3E18CD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TJsonSchema.Tests", "tests\TJsonSchema.Tests\TJsonSchema.Tests.csproj", "{6F1F67EF-CC72-4A2E-8D2A-C8CFF7A15D6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2BD6DD96-B68F-4512-BDC6-EAB59B3E18CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BD6DD96-B68F-4512-BDC6-EAB59B3E18CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BD6DD96-B68F-4512-BDC6-EAB59B3E18CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F1F67EF-CC72-4A2E-8D2A-C8CFF7A15D6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F1F67EF-CC72-4A2E-8D2A-C8CFF7A15D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F1F67EF-CC72-4A2E-8D2A-C8CFF7A15D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F1F67EF-CC72-4A2E-8D2A-C8CFF7A15D6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
