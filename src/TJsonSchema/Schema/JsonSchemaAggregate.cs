@@ -12,5 +12,5 @@ internal class JsonSchemaAggregate<T> : JsonSchemaBase<T> where T : IJsonNode
         Schemas = schemas;
     }
 
-    public override bool Validate(T value)=> Schemas.Any(schema => schema.Validate(value));
+    public override bool Validate(T value)=> Schemas.All(schema => schema.Validate(value));
 }

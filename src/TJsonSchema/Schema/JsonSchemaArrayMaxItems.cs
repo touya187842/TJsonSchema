@@ -13,6 +13,6 @@ internal class JsonSchemaArrayMaxItems : JsonSchemaBase<IJsonArray>, IJsonSchema
 
     public override bool Validate(IJsonArray value)
     {
-        return value.Count >= MaxItems;
+        return value.Count <= MaxItems;
     }
 }
