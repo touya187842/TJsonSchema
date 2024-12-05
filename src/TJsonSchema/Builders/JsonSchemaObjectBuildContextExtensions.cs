@@ -7,8 +7,8 @@ namespace TJsonSchema.Builders;
 
 public static class JsonSchemaObjectBuildContextExtensions
 {
-    public static IJsonSchemaObjectBuildContext<TFactory> AsObject<TContext, TFactory>(this TContext context)
-        where TContext : IJsonSchemaRootBuildContext<TFactory>
+    public static IJsonSchemaObjectBuildContext<TFactory> AsObject<TFactory>(
+        this IJsonSchemaRootBuildContext<TFactory> context)
         where TFactory : IBuildContextFactory<TFactory>
     {
         switch (context)
@@ -27,25 +27,28 @@ public static class JsonSchemaObjectBuildContextExtensions
                 throw new InvalidOperationException();
         }
     }
-    
-    public static TContext MinProperties<TContext, TFactory>(this TContext obj, int minProperties)
-        where TContext : IJsonSchemaObjectBuildContext<TFactory>
+
+    public static IJsonSchemaObjectBuildContext<TFactory> MinProperties<TFactory>(
+        this IJsonSchemaObjectBuildContext<TFactory> obj, 
+        int minProperties)
         where TFactory : IBuildContextFactory<TFactory>
     {
         obj.MinProperties = minProperties;
         return obj;
     }
 
-    public static TContext MaxProperties<TContext, TFactory>(this TContext obj, int maxProperties)
-        where TContext : IJsonSchemaObjectBuildContext<TFactory>
+    public static IJsonSchemaObjectBuildContext<TFactory> MaxProperties<TFactory>(
+        this IJsonSchemaObjectBuildContext<TFactory> obj, 
+        int maxProperties)
         where TFactory : IBuildContextFactory<TFactory>
     {
         obj.MaxProperties = maxProperties;
         return obj;
     }
 
-    public static TContext AdditionalProperties<TContext, TFactory>(this TContext obj, bool allowAny)
-        where TContext : IJsonSchemaObjectBuildContext<TFactory>
+    public static IJsonSchemaObjectBuildContext<TFactory> AdditionalProperties<TFactory>(
+        this IJsonSchemaObjectBuildContext<TFactory> obj, 
+        bool allowAny)
         where TFactory : IBuildContextFactory<TFactory>
     {
         var root = TFactory.CreateRootBuildContext();
@@ -54,11 +57,10 @@ public static class JsonSchemaObjectBuildContextExtensions
         return obj;
     }
 
-    public static IJsonSchemaPropertyBuildContext<TFactory> AddProperty<TContext, TFactory>(
-        this TContext obj,
+    public static IJsonSchemaPropertyBuildContext<TFactory> AddProperty<TFactory>(
+        this IJsonSchemaObjectBuildContext<TFactory> obj,
         string propertyName,
         Action<IJsonSchemaRootBuildContext<TFactory>> propertyValue)
-        where TContext : IJsonSchemaObjectBuildContext<TFactory>
         where TFactory : IBuildContextFactory<TFactory>
     {
         if (obj.Properties is null)
@@ -79,9 +81,9 @@ public static class JsonSchemaObjectBuildContextExtensions
         return property;
     }
 
-    public static TContext AdditionalProperties<TContext, TFactory>(this TContext obj,
+    public static IJsonSchemaObjectBuildContext<TFactory> AdditionalProperties<TFactory>(
+        this IJsonSchemaObjectBuildContext<TFactory> obj,
         Action<IJsonSchemaRootBuildContext<TFactory>> schemaConfig)
-        where TContext : IJsonSchemaObjectBuildContext<TFactory>
         where TFactory : IBuildContextFactory<TFactory>
     {
         var additional = TFactory.CreateRootBuildContext();
@@ -90,12 +92,11 @@ public static class JsonSchemaObjectBuildContextExtensions
         return obj;
     }
 
-    public static TContext PatternProperty<TContext, TFactory>(
-        this TContext obj,
+    public static IJsonSchemaObjectBuildContext<TFactory> PatternProperty<TFactory>(
+        this IJsonSchemaObjectBuildContext<TFactory> obj,
         [StringSyntax(StringSyntaxAttribute.Regex)]
         string regex,
         Action<IJsonSchemaRootBuildContext<TFactory>> schemaConfig)
-        where TContext : IJsonSchemaObjectBuildContext<TFactory>
         where TFactory : IBuildContextFactory<TFactory>
     {
         var additional = TFactory.CreateRootBuildContext();

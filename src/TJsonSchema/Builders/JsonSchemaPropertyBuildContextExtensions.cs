@@ -4,16 +4,18 @@ namespace TJsonSchema.Builders;
 
 public static class JsonSchemaPropertyBuildContextExtensions
 {
-    public static TContext Required<TContext, TFactory>(this TContext property, bool required = true)
-        where TContext : IJsonSchemaPropertyBuildContext<TFactory>
+    public static IJsonSchemaPropertyBuildContext<TFactory> Required<TFactory>(
+        this IJsonSchemaPropertyBuildContext<TFactory> property,
+        bool required = true)
         where TFactory : IBuildContextFactory<TFactory>
     {
         property.IsRequired = required;
         return property;
     }
 
-    public static TContext DependsOn<TContext, TFactory>(this TContext property, string otherPropertyName)
-        where TContext : IJsonSchemaPropertyBuildContext<TFactory>
+    public static IJsonSchemaPropertyBuildContext<TFactory> DependsOn<TFactory>(
+        this IJsonSchemaPropertyBuildContext<TFactory> property, 
+        string otherPropertyName)
         where TFactory : IBuildContextFactory<TFactory>
     {
         property.Dependencies ??= new List<object>();

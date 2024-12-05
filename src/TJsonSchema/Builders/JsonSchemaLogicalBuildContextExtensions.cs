@@ -4,8 +4,8 @@ namespace TJsonSchema.Builders;
 
 public static class JsonSchemaLogicalBuildContextExtensions
 {
-    public static TContext Not<TContext, TFactory>(this TContext schema, Action<IJsonSchemaRootBuildContext<TFactory>> subSchema)
-        where TContext : IJsonSchemaRootBuildContext<TFactory>
+    public static IJsonSchemaRootBuildContext<TFactory> Not<TFactory>(this IJsonSchemaRootBuildContext<TFactory> schema,
+        Action<IJsonSchemaRootBuildContext<TFactory>> subSchema)
         where TFactory : IBuildContextFactory<TFactory>
     {
         if (schema is IJsonSchemaRootBuildContext<TFactory> { Kind: null } @default)
@@ -19,8 +19,9 @@ public static class JsonSchemaLogicalBuildContextExtensions
         throw new InvalidOperationException();
     }
 
-    public static TContext AnyOf<TContext, TFactory>(this TContext schema, params Action<IJsonSchemaRootBuildContext<TFactory>>[] subSchemas)
-        where TContext : IJsonSchemaRootBuildContext<TFactory>
+    public static IJsonSchemaRootBuildContext<TFactory> AnyOf<TFactory>(
+        this IJsonSchemaRootBuildContext<TFactory> schema,
+        params Action<IJsonSchemaRootBuildContext<TFactory>>[] subSchemas)
         where TFactory : IBuildContextFactory<TFactory>
     {
         switch (schema)
@@ -40,8 +41,9 @@ public static class JsonSchemaLogicalBuildContextExtensions
         }
     }
 
-    public static TContext AllOf<TContext, TFactory>(this TContext schema, params Action<IJsonSchemaRootBuildContext<TFactory>>[] subSchemas)
-        where TContext : IJsonSchemaRootBuildContext<TFactory>
+    public static IJsonSchemaRootBuildContext<TFactory> AllOf<TFactory>(
+        this IJsonSchemaRootBuildContext<TFactory> schema,
+        params Action<IJsonSchemaRootBuildContext<TFactory>>[] subSchemas)
         where TFactory : IBuildContextFactory<TFactory>
     {
         switch (schema)
@@ -61,8 +63,9 @@ public static class JsonSchemaLogicalBuildContextExtensions
         }
     }
 
-    public static TContext OneOf<TContext, TFactory>(this TContext schema, params Action<IJsonSchemaRootBuildContext<TFactory>>[] subSchemas)
-        where TContext : IJsonSchemaRootBuildContext<TFactory>
+    public static IJsonSchemaRootBuildContext<TFactory> OneOf<TFactory>(
+        this IJsonSchemaRootBuildContext<TFactory> schema,
+        params Action<IJsonSchemaRootBuildContext<TFactory>>[] subSchemas)
         where TFactory : IBuildContextFactory<TFactory>
     {
         switch (schema)

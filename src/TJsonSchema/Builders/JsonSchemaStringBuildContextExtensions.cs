@@ -6,8 +6,7 @@ namespace TJsonSchema.Builders;
 
 public static class JsonSchemaStringBuildContextExtensions
 {
-    public static IJsonSchemaStringBuildContext AsString<TContext, TFactory>(this TContext context)
-        where TContext : IJsonSchemaRootBuildContext<TFactory>
+    public static IJsonSchemaStringBuildContext AsString<TFactory>(this IJsonSchemaRootBuildContext<TFactory> context)
         where TFactory : IBuildContextFactory<TFactory>
     {
         switch (context)
@@ -26,7 +25,7 @@ public static class JsonSchemaStringBuildContextExtensions
                 throw new InvalidOperationException();
         }
     }
-    
+
     public static T MaxLength<T>(this T @string, int maxLength) where T : IJsonSchemaStringBuildContext
     {
         @string.MaxLength = maxLength;
@@ -45,5 +44,4 @@ public static class JsonSchemaStringBuildContextExtensions
         @string.Pattern = new Regex(pattern);
         return @string;
     }
-
 }

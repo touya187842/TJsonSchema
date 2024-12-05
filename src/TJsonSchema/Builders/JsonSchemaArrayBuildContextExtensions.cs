@@ -4,8 +4,8 @@ namespace TJsonSchema.Builders;
 
 public static class JsonSchemaArrayBuildContextExtensions
 {
-    public static IJsonSchemaArrayBuildContext<TFactory> AsArray<TContext, TFactory>(this TContext context)
-        where TContext : IJsonSchemaRootBuildContext<TFactory>
+    public static IJsonSchemaArrayBuildContext<TFactory> AsArray<TFactory>(
+        this IJsonSchemaRootBuildContext<TFactory> context)
         where TFactory : IBuildContextFactory<TFactory>
     {
         switch (context)
@@ -25,32 +25,35 @@ public static class JsonSchemaArrayBuildContextExtensions
         }
     }
 
-    public static TContext MinItems<TContext, TFactory>(this TContext array, int minItems)
-        where TContext : IJsonSchemaArrayBuildContext<TFactory>
+    public static IJsonSchemaArrayBuildContext<TFactory> MinItems<TFactory>(
+        this IJsonSchemaArrayBuildContext<TFactory> array,
+        int minItems)
         where TFactory : IBuildContextFactory<TFactory>
     {
         array.MinItems = minItems;
         return array;
     }
 
-    public static TContext MaxItems<TContext, TFactory>(this TContext array, int maxItems)
-        where TContext : IJsonSchemaArrayBuildContext<TFactory>
+    public static IJsonSchemaArrayBuildContext<TFactory> MaxItems<TFactory>(
+        this IJsonSchemaArrayBuildContext<TFactory> array,
+        int maxItems)
         where TFactory : IBuildContextFactory<TFactory>
     {
         array.MaxItems = maxItems;
         return array;
     }
 
-    public static TContext UniqueItems<TContext, TFactory>(this TContext array, bool mustUnique = true)
-        where TContext : IJsonSchemaArrayBuildContext<TFactory>
+    public static IJsonSchemaArrayBuildContext<TFactory> UniqueItems<TFactory>(
+        this IJsonSchemaArrayBuildContext<TFactory> array,
+        bool mustUnique = true)
         where TFactory : IBuildContextFactory<TFactory>
     {
         array.MustUniqueItems = mustUnique;
         return array;
     }
 
-    public static TContext AdditionalItems<TContext, TFactory>(this TContext array, bool allowAny)
-        where TContext : IJsonSchemaArrayBuildContext<TFactory>
+    public static IJsonSchemaArrayBuildContext<TFactory> AdditionalItems<TFactory>(
+        this IJsonSchemaArrayBuildContext<TFactory> array, bool allowAny)
         where TFactory : IBuildContextFactory<TFactory>
     {
         var root = TFactory.CreateRootBuildContext();

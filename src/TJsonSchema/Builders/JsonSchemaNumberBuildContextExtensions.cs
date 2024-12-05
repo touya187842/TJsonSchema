@@ -4,8 +4,7 @@ namespace TJsonSchema.Builders;
 
 public static class JsonSchemaNumberBuildContextExtensions
 {
-    public static IJsonSchemaNumberBuildContext AsString<TContext, TFactory>(this TContext context)
-        where TContext : IJsonSchemaRootBuildContext<TFactory>
+    public static IJsonSchemaNumberBuildContext AsString<TFactory>(this IJsonSchemaRootBuildContext<TFactory> context)
         where TFactory : IBuildContextFactory<TFactory>
     {
         switch (context)
@@ -24,7 +23,7 @@ public static class JsonSchemaNumberBuildContextExtensions
                 throw new InvalidOperationException();
         }
     }
-    
+
     public static T MustBeMultipleOf<T>(this T number, int multipleOf) where T : IJsonSchemaNumberBuildContext
     {
         number.MultipleOf = multipleOf;
