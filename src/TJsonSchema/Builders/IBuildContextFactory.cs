@@ -12,4 +12,6 @@ public interface IBuildContextFactory<TSelf>
     public static abstract IJsonSchemaStringBuildContext CreateStringBuildContext();
     
     public static abstract IJsonSchemaNumberBuildContext CreateNumberBuildContext();
+
+    public static abstract IJsonSchema BuildSchema(IJsonSchemaRootBuildContext<TSelf> root);
 }
